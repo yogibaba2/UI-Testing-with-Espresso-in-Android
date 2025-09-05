@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/webview"
+        android:title="@string/Browser"
+        android:icon="@drawable/layer"/>
+
+    <item android:id="@+id/buttonPage"
+        android:title="@string/Home"
+        android:icon="@drawable/house"/>
+
+</menu>

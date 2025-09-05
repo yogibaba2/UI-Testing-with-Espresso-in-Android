@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="Home">घर</string>
+    <string name="COLOR">रंग</string>
+    <string name="TOAST">टोस्ट</string>
+    <string name="TEXT">मूलपाठ</string>
+    <string name="NOTIFICATION">अधिसूचना</string>
+    <string name="SPEED_TEST">स्पीड टेस्ट</string>
+    <string name="GEOLOCATION">जियोलोकेशन</string>
+    <string name="Browser">ब्राउज़र</string>
+    <string name="Find">खोज</string>
+</resources>

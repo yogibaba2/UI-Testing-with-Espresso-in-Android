@@ -1,0 +1,39 @@
+name: "Prod Release"
+on:
+  release:
+    types:
+      - published
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      
+      - run: mkdir ./assets
+      
+      - uses: dsaltares/fetch-gh-release-asset@master
+        with:
+          repo: "LambdatestIncPrivate/${{ github.event.repository.name }}"
+          version: "tags/${{ github.event.release.tag_name }}"
+          regex: true
+          file: ".*\\.apk"
+          target: "./assets/"
+          token: ${{ secrets.GIT_TOKEN }}
+
+      - run: ls ./assets/
+      
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID_PROD }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_PROD }}
+          aws-region: us-east-1
+
+      - name: Copy release to the s3 bucket for backup
+        run:
+          aws s3 cp ./assets/Proverbial.apk s3://prod-realdevice-mobile-artifacts-v1/assets/docs/proverbial_releases/android/Proverbial_${{ github.event.release.tag_name }}.apk
+          && aws s3 cp ./assets/ProverbialExpresso.apk s3://prod-realdevice-mobile-artifacts-v1/assets/docs/proverbial_releases/android/ProverbialExpresso_${{ github.event.release.tag_name }}.apk
+
+      - name: Copy release to the s3 bucket for backup for public 
+        run:
+          aws s3 cp ./assets/Proverbial.apk s3://prod-realdevice-mobile-artifacts-v1/assets/docs/proverbial_android.apk --acl public-read
+          && aws s3 cp ./assets/ProverbialExpresso.apk s3://prod-realdevice-mobile-artifacts-v1/assets/docs/proverbial_android_expressotest.apk --acl public-read
