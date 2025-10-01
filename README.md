@@ -1,4 +1,4 @@
-# Proverbial Espresso Sample
+# UI Testing with Espresso in Android
 
 ## Description
 
